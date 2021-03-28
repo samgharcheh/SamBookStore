@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using AutoMapper;
 using BookStore.API.Dtos.Author;
 using BookStore.API.Dtos.Book;
@@ -25,10 +26,8 @@ namespace BookStore.API.Configuration
                 opt.MapFrom(x => x.Authors.Select(a => a.Id).ToList()));
             CreateMap<BookAddDto, Book>();
 
-            //CreateMap<Book, BookEditDto>().IncludeMembers(s => s.Authors).ForMember(dto =>
-            //    dto.AuthorIds, opt => opt.MapFrom(x => x.Authors.Select(a => a.Id).ToList()));
-            //CreateMap<BookEditDto, Book>()
-            //    .ForMember(dto => dto.Authors, opt => opt.MapFrom(x => x.AuthorIds));
+            CreateMap<Book, BookEditDto>().IncludeMembers(s => s.Authors).ForMember(dto =>
+                dto.AuthorIds, opt => opt.MapFrom(x => x.Authors.Select(a => a.Id).ToList()));
 
 
             CreateMap<Book, BookResultDto>().ForMember(dto =>
